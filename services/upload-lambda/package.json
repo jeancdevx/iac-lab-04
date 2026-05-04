@@ -1,0 +1,14 @@
+{
+  "name": "upload-lambda",
+  "version": "1.0.0",
+  "description": "Image upload handler Lambda function for serverless image processing",
+  "type": "module",
+  "main": "index.js",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1041.0",
+    "busboy": "1.6.0"
+  }
+}
