@@ -91,3 +91,18 @@ module "http_api_upload" {
 
   depends_on = [module.lambda_upload]
 }
+
+module "observability" {
+  source = "../../modules/observability"
+
+  name_prefix            = local.name_prefix
+  dead_letter_queue_name = local.dlq_name
+  lambda_function_names = [
+    module.lambda_upload.function_name,
+    module.lambda_crop.function_name,
+  ]
+
+  tags = local.default_tags
+
+  depends_on = [module.sqs, module.lambda_upload, module.lambda_crop, module.http_api_upload]
+}

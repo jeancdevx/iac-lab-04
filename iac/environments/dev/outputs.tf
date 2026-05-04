@@ -67,3 +67,13 @@ output "upload_api_endpoint" {
   description = "Base URL of the HTTP API for image uploads"
   value       = module.http_api_upload.api_endpoint
 }
+
+output "dlq_alarm_name" {
+  description = "CloudWatch alarm name for the DLQ"
+  value       = module.observability.dlq_alarm_name
+}
+
+output "lambda_error_alarm_names" {
+  description = "CloudWatch alarm names for Lambda errors"
+  value       = module.observability.lambda_error_alarm_names
+}
