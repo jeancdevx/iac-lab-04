@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 data "aws_iam_policy_document" "this" {
   statement {
     sid     = "AllowS3ToSendMessages"
@@ -15,6 +17,12 @@ data "aws_iam_policy_document" "this" {
       test     = "ArnEquals"
       variable = "aws:SourceArn"
       values   = [var.source_bucket_arn]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceAccount"
+      values   = [data.aws_caller_identity.current.account_id]
     }
   }
 }
