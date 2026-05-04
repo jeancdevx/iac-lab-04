@@ -39,3 +39,23 @@ module "s3" {
 
   depends_on = [module.sqs]
 }
+
+module "lambda_upload" {
+  source = "../../modules/lambda_upload"
+
+  function_name = "${local.name_prefix}-upload-lambda"
+  source_dir    = abspath("${path.module}/../../../services/upload-lambda")
+  s3_bucket     = module.s3.bucket_name
+  s3_bucket_arn = module.s3.bucket_arn
+
+  aws_profile = var.aws_profile
+
+  vpc_config = {
+    subnet_ids         = module.vpc.private_subnet_ids
+    security_group_ids = [module.vpc.lambda_upload_security_group_id]
+  }
+
+  tags = local.default_tags
+
+  depends_on = [module.s3]
+}

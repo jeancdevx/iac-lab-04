@@ -52,3 +52,13 @@ output "dlq_arn" {
   description = "ARN of the dead-letter queue"
   value       = module.sqs.dlq_arn
 }
+
+output "upload_lambda_function_arn" {
+  description = "ARN of the upload Lambda function"
+  value       = module.lambda_upload.function_arn
+}
+
+output "upload_lambda_function_name" {
+  description = "Name of the upload Lambda function"
+  value       = module.lambda_upload.function_name
+}
