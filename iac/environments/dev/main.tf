@@ -80,3 +80,14 @@ module "lambda_crop" {
 
   depends_on = [module.sqs, module.s3]
 }
+
+module "http_api_upload" {
+  source = "../../modules/http_api_upload"
+
+  api_name            = "${local.name_prefix}-upload-api"
+  lambda_function_arn = module.lambda_upload.function_arn
+
+  tags = local.default_tags
+
+  depends_on = [module.lambda_upload]
+}

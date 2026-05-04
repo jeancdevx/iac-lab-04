@@ -62,3 +62,8 @@ output "upload_lambda_function_name" {
   description = "Name of the upload Lambda function"
   value       = module.lambda_upload.function_name
 }
+
+output "upload_api_endpoint" {
+  description = "Base URL of the HTTP API for image uploads"
+  value       = module.http_api_upload.api_endpoint
+}
