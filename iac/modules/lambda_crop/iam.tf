@@ -36,7 +36,6 @@ data "aws_iam_policy_document" "s3_get_put" {
 
     actions = [
       "s3:GetObject",
-      "s3:ListBucket",
     ]
 
     resources = [
@@ -51,7 +50,6 @@ data "aws_iam_policy_document" "s3_get_put" {
 
     actions = [
       "s3:PutObject",
-      "s3:PutObjectAcl",
     ]
 
     resources = ["${var.s3_bucket_arn}/processed/*"]
