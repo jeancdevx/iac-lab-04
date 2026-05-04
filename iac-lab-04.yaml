@@ -1,0 +1,144 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: iac-lab-04 dev e2e
+meta:
+  id: wrk_0673d4eda74e4c77b30db836ddea10ae
+  created: 1777872612296
+  modified: 1777872612296
+  description: "End-to-end upload flow for dev"
+collection:
+  - name: Upload - small PNG
+    meta:
+      id: req_small_png_8e0f2f4f0f6144b6a6f3b9c9a10a1a01
+      created: 1777872612305
+      modified: 1777872616142
+      isPrivate: false
+      description: "Validates the complete flow with a tiny PNG"
+      sortKey: -1777872612305
+    method: POST
+    url: "{{ api_base_url }}/upload"
+    headers:
+      - name: Content-Type
+        value: application/json
+        description: ""
+        disabled: false
+      - name: Accept
+        value: application/json
+        description: ""
+        disabled: false
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "filename": "small-red.png",
+          "mimetype": "image/png",
+          "data": "{{ small_png_b64 }}"
+        }
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - name: Upload - medium PNG
+    meta:
+      id: req_medium_png_2f8b9c1ef5c64b1895c5b4a2bb9f3c002
+      created: 1777872612306
+      modified: 1777872616143
+      isPrivate: false
+      description: "Validates the complete flow with a larger PNG"
+      sortKey: -1777872612304
+    method: POST
+    url: "{{ api_base_url }}/upload"
+    headers:
+      - name: Content-Type
+        value: application/json
+        description: ""
+        disabled: false
+      - name: Accept
+        value: application/json
+        description: ""
+        disabled: false
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "filename": "medium-blue.png",
+          "mimetype": "image/png",
+          "data": "{{ medium_png_b64 }}"
+        }
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - name: Upload - invalid file
+    meta:
+      id: req_invalid_8a5c4d09d6f14ef7a0fca5f10b7d9d03
+      created: 1777872612307
+      modified: 1777872616144
+      isPrivate: false
+      description: "Validates rejection of unsupported filename and mimetype"
+      sortKey: -1777872612303
+    method: POST
+    url: "{{ api_base_url }}/upload"
+    headers:
+      - name: Content-Type
+        value: application/json
+        description: ""
+        disabled: false
+      - name: Accept
+        value: application/json
+        description: ""
+        disabled: false
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "filename": "not-an-image.txt",
+          "mimetype": "text/plain",
+          "data": "{{ invalid_b64 }}"
+        }
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_2fc6969508747c0d7066c34460932a8e97e8d29c
+    created: 1777872612300
+    modified: 1777872612300
+environments:
+  name: Dev Environment
+  meta:
+    id: env_2fc6969508747c0d7066c34460932a8e97e8d29c
+    created: 1777872612298
+    modified: 1777872612298
+    isPrivate: false
+  data:
+    api_base_url: "https://p6ck326ii1.execute-api.us-east-1.amazonaws.com"
+    small_png_b64: iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR42mP4z8AAAAMBAQD3A0FDAAAAAElFTkSuQmCC
+    medium_png_b64: iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAATElEQVR42u3PQQkAAAgEsItucy+Cb2GwAktmfxMQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQuBQXsPFaWqd+fAAAAABJRU5ErkJggg==
+    invalid_b64: bm90IGFuIGltYWdlIGF0IGFsbA==
