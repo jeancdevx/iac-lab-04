@@ -73,7 +73,7 @@ module "lambda_crop" {
 
   vpc_config = {
     subnet_ids         = module.vpc.private_subnet_ids
-    security_group_ids = [module.vpc.lambda_upload_security_group_id]
+    security_group_ids = [module.vpc.lambda_crop_security_group_id]
   }
 
   tags = local.default_tags
