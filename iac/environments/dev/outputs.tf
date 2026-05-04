@@ -27,3 +27,28 @@ output "nat_gateway_ids" {
   description = "IDs of created NAT gateways (if any)"
   value       = module.vpc.nat_gateway_ids
 }
+
+output "bucket_name" {
+  description = "Name of the images bucket"
+  value       = module.s3.bucket_name
+}
+
+output "bucket_arn" {
+  description = "ARN of the images bucket"
+  value       = module.s3.bucket_arn
+}
+
+output "queue_name" {
+  description = "Name of the main SQS queue"
+  value       = module.sqs.queue_name
+}
+
+output "queue_arn" {
+  description = "ARN of the main SQS queue"
+  value       = module.sqs.queue_arn
+}
+
+output "dlq_arn" {
+  description = "ARN of the dead-letter queue"
+  value       = module.sqs.dlq_arn
+}

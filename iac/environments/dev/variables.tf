@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region where development resources are provisioned"
   type        = string
-  default     = "us-east-2"
+  default     = "us-east-1"
 }
 
 variable "aws_profile" {

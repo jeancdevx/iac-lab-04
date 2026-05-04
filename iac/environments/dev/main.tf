@@ -1,6 +1,11 @@
 locals {
   name_prefix = "${var.project_name}-${var.environment}"
+  bucket_name = "${local.name_prefix}-${data.aws_caller_identity.current.account_id}-images"
+  queue_name  = "${local.name_prefix}-${data.aws_caller_identity.current.account_id}-image-queue"
+  dlq_name    = "${local.name_prefix}-${data.aws_caller_identity.current.account_id}-image-dlq"
 }
+
+data "aws_caller_identity" "current" {}
 
 module "vpc" {
   source = "../../modules/vpc"
@@ -14,4 +19,23 @@ module "vpc" {
   enable_nat_gateway   = var.enable_nat_gateway
   single_nat_gateway   = var.single_nat_gateway
   tags                 = local.default_tags
+}
+
+module "sqs" {
+  source = "../../modules/sqs"
+
+  queue_name             = local.queue_name
+  dead_letter_queue_name = local.dlq_name
+  source_bucket_arn      = "arn:aws:s3:::${local.bucket_name}"
+  tags                   = local.default_tags
+}
+
+module "s3" {
+  source = "../../modules/s3"
+
+  bucket_name            = local.bucket_name
+  notification_queue_arn = module.sqs.queue_arn
+  tags                   = local.default_tags
+
+  depends_on = [module.sqs]
 }
