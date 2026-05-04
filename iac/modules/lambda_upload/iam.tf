@@ -36,7 +36,6 @@ data "aws_iam_policy_document" "s3_put_uploads" {
 
     actions = [
       "s3:PutObject",
-      "s3:PutObjectAcl",
     ]
 
     resources = ["${var.s3_bucket_arn}/uploads/*"]
