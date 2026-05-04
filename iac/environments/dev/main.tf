@@ -59,3 +59,24 @@ module "lambda_upload" {
 
   depends_on = [module.s3]
 }
+
+module "lambda_crop" {
+  source = "../../modules/lambda_crop"
+
+  function_name = "${local.name_prefix}-crop-lambda"
+  source_dir    = abspath("${path.module}/../../../services/crop-lambda")
+  s3_bucket     = module.s3.bucket_name
+  s3_bucket_arn = module.s3.bucket_arn
+  sqs_queue_arn = module.sqs.queue_arn
+
+  aws_profile = var.aws_profile
+
+  vpc_config = {
+    subnet_ids         = module.vpc.private_subnet_ids
+    security_group_ids = [module.vpc.lambda_upload_security_group_id]
+  }
+
+  tags = local.default_tags
+
+  depends_on = [module.sqs, module.s3]
+}
