@@ -1,6 +1,6 @@
-import { randomUUID } from 'node:crypto'
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 import Busboy from 'busboy'
+import { v4 as uuidv4 } from 'uuid'
 
 const s3Client = new S3Client({ region: process.env.AWS_REGION })
 
@@ -49,7 +49,7 @@ async function handleMultipart(event, body) {
 
     bb.on('file', (fieldname, file, info) => {
       filename = info.filename
-      mimetype = info.encoding
+      mimetype = info.mimeType
 
       file.on('data', (chunk) => {
         fileBuffer = Buffer.concat([fileBuffer, chunk])
@@ -102,7 +102,7 @@ async function handleBase64(body) {
 }
 
 async function uploadToS3(filename, fileBuffer, mimetype) {
-  const fileId = randomUUID()
+  const fileId = uuidv4()
   const key = `${UPLOAD_PREFIX}/${fileId}-${filename}`
 
   const command = new PutObjectCommand({
