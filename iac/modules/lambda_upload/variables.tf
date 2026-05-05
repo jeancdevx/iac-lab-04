@@ -27,12 +27,6 @@ variable "vpc_config" {
   default = null
 }
 
-variable "aws_profile" {
-  description = "Optional AWS CLI profile to use for local image build/push"
-  type        = string
-  default     = ""
-}
-
 variable "tags" {
   description = "Tags applied to Lambda resources"
   type        = map(string)
