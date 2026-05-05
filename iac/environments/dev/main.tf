@@ -48,8 +48,6 @@ module "lambda_upload" {
   s3_bucket     = module.s3.bucket_name
   s3_bucket_arn = module.s3.bucket_arn
 
-  aws_profile = var.aws_profile
-
   vpc_config = {
     subnet_ids         = module.vpc.private_subnet_ids
     security_group_ids = [module.vpc.lambda_upload_security_group_id]
@@ -68,8 +66,6 @@ module "lambda_crop" {
   s3_bucket     = module.s3.bucket_name
   s3_bucket_arn = module.s3.bucket_arn
   sqs_queue_arn = module.sqs.queue_arn
-
-  aws_profile = var.aws_profile
 
   vpc_config = {
     subnet_ids         = module.vpc.private_subnet_ids
